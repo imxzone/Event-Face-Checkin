@@ -90,7 +90,16 @@ def build_face_database():
     labels_df = pd.DataFrame(labels)
 
     np.save(Config.embeddings_file, all_embeddings)
-    labels_df.to_csv(Config.labels_file, index=False, encoding="utf-8-sig")
+
+    df["embedding_index"] = df["ID_Name"].apply(
+        lambda pid: next(
+            (i for i, label in enumerate(labels) if label["ID_Name"] == pid),
+            None
+        )
+    )
+
+    df.to_csv(Config.csv_info_file, index=False, encoding="utf-8-sig")
+
 
     print("\n[INFO] Hoàn tất build database!")
     print(f" - Thành công: {len(all_embeddings)} người")

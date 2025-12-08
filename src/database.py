@@ -4,7 +4,7 @@ from src.config import Config
 
 def load_database():
     embeddings = np.load(Config.embeddings_file)
-    labels_df = pd.read_csv(Config.labels_file)
+    labels_df = pd.read_csv(Config.csv_info_file)
     return embeddings, labels_df
 
 def cosine_similarity(vec, mat):

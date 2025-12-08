@@ -7,9 +7,8 @@ class Config:
     processed_dir = os.path.join(data_dir, "processed")
     guest_csv_file = "guests.csv"
     csv_info_file = "data.csv"
-    embeddings_file = os.path.join(processed_dir, "face_embeddings.npy")
-    labels_file = os.path.join(processed_dir, "face_labels.csv")
-    checkin_log = os.path.join(processed_dir, "checkins.csv")
+    embeddings_file = "face_embeddings.npy"
+    checkin_log = os.path.join(processed_dir, "check_log.csv")
 
     model_name = "buffalo_l"
     ctx_id = -1                  # -1 = CPU

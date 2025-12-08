@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Minimal Test</title>
+  <link href="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 50px;
+      background: #000;
+    }
+
+    #player {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <video id="player" controls></video>
+
+  <script src="https://unpkg.com/cloudinary-video-player/dist/cld-video-player.min.js"></script>
+  <script>
+    const player = cloudinary.videoPlayer('player', {
+      cloudName: 'dxxbrrgha',
+      publicId: '2642_mvrzyz',
+      profile: 'cld-default'
+    });
+  </script>
+</body>
+
+</html>
