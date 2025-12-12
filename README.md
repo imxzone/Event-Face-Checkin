@@ -1,97 +1,44 @@
-# Event Face Check-in System for Edu Campus
-Hệ thống điểm danh sự kiện bằng nhận diện khuôn mặt, ứng dụng AI cho môi trường giáo dục tại FPT University.
+Real-Time Face Recognition for Event Check-in
+Introduction
 
----
+This project presents a real-time face recognition–based event check-in system designed for student clubs and small to medium-sized events.
+By leveraging computer vision and a pretrained face recognition model, the system automatically identifies participants via webcam and records their attendance efficiently.
 
-## 1. Giới thiệu (Overview)
+Motivation
 
-**Event Face Check-in System** là một hệ thống điểm danh tự động sử dụng công nghệ **nhận diện khuôn mặt (Face Recognition)**, được thiết kế nhằm phục vụ các sự kiện học thuật và ngoại khóa tại **FPT University Edu Campus**.
+Conventional check-in methods such as manual lists or QR codes are often time-consuming, inconvenient, and prone to misuse.
+The goal of this project is to develop a fast, contactless, and easy-to-deploy check-in solution that focuses on practical implementation rather than complex model training.
 
-Hệ thống giúp thay thế các phương pháp điểm danh thủ công hoặc QR code truyền thống, từ đó:
-- Rút ngắn thời gian check-in
-- Hạn chế gian lận điểm danh hộ
-- Tự động hóa việc ghi nhận và quản lý dữ liệu tham dự
+Method Overview
 
-Project được xây dựng theo hướng **Applied AI System**, tập trung vào tính ứng dụng thực tế trong môi trường giáo dục.
+The system follows a straightforward pipeline:
 
----
+Capture face frames from a webcam in real time
 
-## 2. Bài toán & Động lực (Problem Statement)
+Extract face embeddings using a pretrained face recognition model
 
-Trong các sự kiện tại trường đại học, công tác điểm danh thường gặp các vấn đề:
-- Tốn nhiều nhân lực vận hành
-- Dễ xảy ra sai sót khi nhập liệu thủ công
-- QR code có thể bị chia sẻ hoặc check-in hộ
-- Khó tổng hợp dữ liệu theo thời gian thực
+Match embeddings against registered participants
 
-➡️ **Mục tiêu của project** là xây dựng một hệ thống AI có thể:
-- Nhận diện người tham dự nhanh chóng, không tiếp xúc
-- Mỗi người chỉ được check-in một lần
-- Tự động lưu lại dữ liệu điểm danh
+Log successful check-ins and prevent duplicate entries
 
----
+This project emphasizes real-time inference and system integration, not training models from scratch.
 
-## 3. Tổng quan giải pháp (Solution Overview)
+How to run
+python preprocess.py
+python build_embeddings.py
+python main.py
 
-Hệ thống sử dụng camera để thu nhận hình ảnh khuôn mặt người tham dự theo thời gian thực.  
-Dữ liệu khuôn mặt sẽ được xử lý và so khớp với dữ liệu đã đăng ký trước đó để xác định danh tính.
 
-Khi nhận diện thành công:
-- Trạng thái check-in được cập nhật
-- Thời gian check-in được ghi nhận
-- Dữ liệu được lưu dưới dạng CSV / JSON hoặc gửi qua API
+Check-in records are stored in checkins.csv.
 
----
+Requirements
 
-## 4. Kiến trúc hệ thống (System Architecture)
+Python 3.9+
 
-Quy trình hoạt động tổng quát của hệ thống:
+OpenCV
 
-1. Camera thu hình khuôn mặt theo thời gian thực
-2. Phát hiện và căn chỉnh khuôn mặt (Face Detection & Alignment)
-3. Trích xuất vector đặc trưng khuôn mặt (Face Embedding)
-4. So khớp với dữ liệu đã lưu bằng cosine similarity
-5. Kiểm tra ngưỡng nhận diện và trạng thái check-in
-6. Ghi nhận kết quả điểm danh
+InsightFace
 
----
+NumPy
 
-## 5. Tính năng chính (Key Features)
-
-- Nhận diện khuôn mặt theo thời gian thực
-- Mỗi người chỉ được check-in một lần
-- Thời gian chờ (cooldown) để tránh check-in lặp
-- Lưu dữ liệu điểm danh tự động (CSV / JSON)
-- Hỗ trợ chia sẻ dữ liệu giữa nhiều máy thông qua API
-- Cấu hình linh hoạt ngưỡng nhận diện và thời gian cooldown
-
----
-
-## 6. Công nghệ sử dụng (Tech Stack)
-
-- **Ngôn ngữ:** Python 3.10  
-- **AI / Computer Vision:** InsightFace  
-- **Xử lý ảnh & camera:** OpenCV  
-- **Xử lý dữ liệu:** NumPy, Pandas  
-- **Backend / API:** Flask  
-- **Lưu trữ:** CSV, JSON  
-
----
-
-## 7. Cấu trúc thư mục (Project Structure)
-
-```text
-Event-Face-Checkin/
-├── data/
-│   ├── raw/                # Ảnh gốc ban đầu
-│   ├── faces/              # Ảnh khuôn mặt đã crop
-│   ├── processed/          # Embeddings và log check-in
-├── src/
-│   ├── preprocess.py       # Xử lý dữ liệu khuôn mặt
-│   ├── main.py             # Chạy hệ thống check-in
-│   ├── api.py              # API chia sẻ dữ liệu
-│   ├── config.py           # File cấu hình hệ thống
-├── ui/
-│   └── main.ui             # Giao diện người dùng (Qt)
-├── requirements.txt
-└── README.md
+Pandas
