@@ -18,7 +18,7 @@ class Config:
     crop_margin_ratio = 0.6
     output_face_size = (512, 512)
 
-    confirm_frames = 5
+    confirm_frames = 3
     checkin_cooldown = 4
     threshold = 0.4
     min_face_size = 60

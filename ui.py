@@ -10,9 +10,14 @@ class MyApp(QWidget):
     def __init__(self):
         super().__init__()
 
-        # load file .ui mới (QWidget)
+        # Load file main.ui vào widget này
         uic.loadUi("main.ui", self)
 
+        # In stylesheet ra console để debug nếu cần
+        print("Current stylesheet:")
+        print(self.styleSheet())
+
+        # Mở camera mặc định
         self.cap = cv2.VideoCapture(0)
 
         self.timer = QTimer()
@@ -20,6 +25,9 @@ class MyApp(QWidget):
         self.timer.start(30)
 
     def update_frame(self):
+        if not self.cap or not self.cap.isOpened():
+            return
+
         ret, frame = self.cap.read()
         if not ret:
             return
@@ -32,11 +40,11 @@ class MyApp(QWidget):
                       QImage.Format.Format_RGB888)
         pix = QPixmap.fromImage(qimg)
 
-        self.Camera.setPixmap(pix)          # tên QLabel trong .ui
+        self.Camera.setPixmap(pix)
         self.Camera.setScaledContents(True)
 
     def closeEvent(self, event):
-        if self.cap.isOpened():
+        if self.cap and self.cap.isOpened():
             self.cap.release()
         cv2.destroyAllWindows()
         event.accept()
